@@ -1,3 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-double mainPadVal = 16;
+const double mainPadVal = 16;
+const double letterPadVal = 8;
+const double circularRadius = 10;

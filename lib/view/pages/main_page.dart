@@ -14,7 +14,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final List<Widget> _indexItems = const [
-    LetterPage(),
+    LetterPage2(),
     HistoryPage(),
     CallPage(),
   ];

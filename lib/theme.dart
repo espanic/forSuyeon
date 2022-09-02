@@ -13,10 +13,12 @@ ThemeData mainTheme = ThemeData(
         TextStyle(color: secondary, fontSize: 64, fontWeight: FontWeight.bold),
     headline2:
         TextStyle(color: secondary, fontSize: 54, fontWeight: FontWeight.bold),
+    headline3:
+        TextStyle(color: secondary, fontSize: 48, fontWeight: FontWeight.bold),
     bodyText1: TextStyle(
         color: Colors.black, fontSize: 24, fontWeight: FontWeight.w600),
     bodyText2: TextStyle(
-        color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+        color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -32,6 +34,5 @@ ThemeData mainTheme = ThemeData(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: primary,
-
   ),
 );

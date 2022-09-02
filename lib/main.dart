@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:for_suyeon/thema.dart';
+import 'package:for_suyeon/theme.dart';
 import 'package:for_suyeon/view/pages/prev_page.dart';
 import 'package:get/get.dart';
 

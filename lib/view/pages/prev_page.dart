@@ -16,7 +16,7 @@ class PrevPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.all(mainPadVal),
+          padding: const EdgeInsets.all(mainPadVal),
           child: Column(
             children: [
               PeanutLoveWalnut(
