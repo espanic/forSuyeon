@@ -1,11 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
+import 'package:for_suyeon/view/components/CustomDialog.dart';
+import 'package:for_suyeon/view/components/history_block.dart';
 import 'package:for_suyeon/view/components/page_title.dart';
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +23,20 @@ class HistoryPage extends StatelessWidget {
         width: 70,
         child: FittedBox(
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  // _pickedImage = null;
+                  return const CustomDialog();
+                },
+              );
+            },
             mini: false,
-            child: const Icon(Icons.add, size: 40,),
+            child: const Icon(
+              Icons.add,
+              size: 40,
+            ),
             backgroundColor: buttonPrimary,
           ),
         ),
@@ -48,49 +67,6 @@ class HistoryPage extends StatelessWidget {
       ),
     );
   }
-}
 
-class HistoryBlock extends StatelessWidget {
-  final String imagePath;
-  final String comment;
 
-  const HistoryBlock({Key? key, required this.imagePath, required this.comment})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: whiteHalf,
-        borderRadius: BorderRadius.circular(circularRadius),
-      ),
-      padding: const EdgeInsets.all(mainPadVal),
-      margin: const EdgeInsets.all(5),
-      child: Column(
-        children: [
-          Image.asset(imagePath),
-          Row(
-            children: [
-              Expanded(
-                flex: 8,
-                child: Text(
-                  comment,
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  onPressed: () {
-                    print("pressed");
-                  },
-                  icon: const Icon(Icons.menu),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 }

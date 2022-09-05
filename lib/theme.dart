@@ -6,7 +6,7 @@ ThemeData mainTheme = ThemeData(
   scaffoldBackgroundColor: primary,
   iconTheme: const IconThemeData(
     color: secondary,
-    size: 64,
+    size: 32,
   ),
   textTheme: const TextTheme(
     headline1:
@@ -15,6 +15,7 @@ ThemeData mainTheme = ThemeData(
         TextStyle(color: secondary, fontSize: 54, fontWeight: FontWeight.bold),
     headline3:
         TextStyle(color: secondary, fontSize: 48, fontWeight: FontWeight.bold),
+    headline4: TextStyle(color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
     bodyText1: TextStyle(
         color: Colors.black, fontSize: 24, fontWeight: FontWeight.w600),
     bodyText2: TextStyle(

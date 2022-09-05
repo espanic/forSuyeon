@@ -13,10 +13,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-  final List<Widget> _indexItems = const [
-    LetterPage2(),
-    HistoryPage(),
-    CallPage(),
+  final List<Widget> _indexItems = [
+    const LetterPage(),
+    const HistoryPage(),
+    const CallPage(),
   ];
 
   @override
@@ -46,7 +46,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  void _onItemTapped(int index){
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });

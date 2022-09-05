@@ -4,8 +4,8 @@ import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/view/components/page_title.dart';
 
-class LetterPage2 extends StatelessWidget {
-  const LetterPage2({Key? key}) : super(key: key);
+class LetterPage extends StatelessWidget {
+  const LetterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
