@@ -9,20 +9,30 @@ ThemeData mainTheme = ThemeData(
     size: 32,
   ),
   textTheme: const TextTheme(
-    headline1:
-        TextStyle(color: secondary, fontSize: 64, fontWeight: FontWeight.bold),
-    headline2:
-        TextStyle(color: secondary, fontSize: 54, fontWeight: FontWeight.bold),
+    headline1: TextStyle(
+        fontFamily: 'SDSamlip',
+        color: secondary,
+        fontSize: 72,
+        fontWeight: FontWeight.bold),
+    headline2: TextStyle(
+        fontFamily: 'SDSamlip',
+        color: secondary,
+        fontSize: 64,
+        fontWeight: FontWeight.bold),
     headline3:
         TextStyle(color: secondary, fontSize: 48, fontWeight: FontWeight.bold),
-    headline4: TextStyle(color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
-    bodyText1: TextStyle(
-      fontFamily: "BinggraeSamanco",
+    headline4: TextStyle(
         color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
+    bodyText1: TextStyle(
+        fontFamily: "BinggraeSamanco",
+        color: Colors.black,
+        fontSize: 32,
+        fontWeight: FontWeight.bold),
     bodyText2: TextStyle(
         fontFamily: "BinggraeSamanco",
-        color: Colors.black, fontSize: 24, fontWeight: FontWeight.normal),
-
+        color: Colors.black,
+        fontSize: 24,
+        fontWeight: FontWeight.normal),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -32,7 +42,6 @@ ThemeData mainTheme = ThemeData(
       elevation: 10,
       primary: buttonPrimary,
       minimumSize: const Size(double.infinity, 60),
-
       textStyle: const TextStyle(
           color: Colors.white,
           fontSize: 32,

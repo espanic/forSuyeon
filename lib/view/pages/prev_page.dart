@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import '../../colors.dart';
 
 class PrevPage extends StatelessWidget {
-  final _controller = Get.put(DataController());
   PrevPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {

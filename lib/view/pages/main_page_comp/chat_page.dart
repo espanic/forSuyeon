@@ -6,11 +6,9 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
-      body: Container(
-        child: const Center(
-          child: Text("Coming soon!"),
-        ),
+    return   const Scaffold(
+      body:  Center(
+        child: Text("Coming soon!"),
       ),
     );
   }

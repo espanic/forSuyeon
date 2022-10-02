@@ -16,7 +16,17 @@ class PeanutLoveWalnut extends StatelessWidget {
           "호두",
           style: themeData.textTheme.headline1,
         ),
-        Icon(CupertinoIcons.heart, color: themeData.iconTheme.color, size: 80,),
+        const SizedBox(
+          width: 10,
+        ),
+        Icon(
+          CupertinoIcons.heart,
+          color: themeData.iconTheme.color,
+          size: 80,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
         Text(
           "피넛",
           style: themeData.textTheme.headline1,

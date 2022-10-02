@@ -14,20 +14,21 @@ class CallPage extends StatelessWidget {
         padding: const EdgeInsets.all(mainPadVal),
         child: Column(
           children: [
-            const PageTitle(
-                titleText: "얘기하기"),
-            SizedBox(
+            const PageTitle(titleText: "호두랑 얘기하기"),
+            const SizedBox(
               height: 40,
             ),
             Flexible(child: Image.asset("assets/pw/waitingyou.png")),
-            ElevatedButton(onPressed: () async {
-              final Uri launchUri = Uri(
-                scheme: 'tel',
-                path: yunhoPhone,
-              );
-              await launchUrl(launchUri);
-            }, child: Icon(Icons.call)),
-            SizedBox(
+            ElevatedButton(
+                onPressed: () async {
+                  final Uri launchUri = Uri(
+                    scheme: 'tel',
+                    path: yunhoPhone,
+                  );
+                  await launchUrl(launchUri);
+                },
+                child: const Icon(Icons.call)),
+            const SizedBox(
               height: 10,
             ),
             Flexible(child: Image.asset("assets/pw/peanut_call.png")),

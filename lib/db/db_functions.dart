@@ -18,14 +18,12 @@ class DBHelper {
   }
 
   initDB() async {
-    print("init database");
     final databasePath = await getDatabasesPath();
     String path = join(databasePath, "my_database.db");
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        print("database onCreate");
         await db.execute(
             "CREATE TABLE HistoryData(id INTEGER PRIMARY KEY, content TEXT, imageArray BLOB )");
       },

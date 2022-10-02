@@ -22,24 +22,22 @@ class PageTitle extends StatelessWidget {
             style: titleStyle ?? Theme.of(context).textTheme.headline2,
           ),
         ),
-        const Spacer(
+        imagePath != null ? const Spacer(
           flex: 1,
-        ),
-        Flexible(
+        ): Container(),
+        imagePath != null ? Flexible(
           flex: 2,
           child: Column(
             children: [
               const SizedBox(height: 20),
-              imagePath != null
-                  ? Image.asset(
-                      imagePath!,
-                      fit: BoxFit.cover,
-                      width: 150,
-                    )
-                  : Container(),
+              Image.asset(
+                imagePath!,
+                fit: BoxFit.cover,
+                width: 150,
+              ),
             ],
           ),
-        ),
+        ): Container(),
       ],
     );
   }

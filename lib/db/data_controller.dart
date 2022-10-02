@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 import 'package:for_suyeon/db/db_functions.dart';
 import 'package:for_suyeon/db/history_data.dart';
@@ -18,8 +19,6 @@ class DataController extends GetxController {
     //   print("getData called");
     // });
     await _initDir();
-    await _getData();
-
     super.onInit();
   }
 
@@ -29,7 +28,7 @@ class DataController extends GetxController {
     await Directory(imageDir).create(recursive: true);
   }
 
-  Future<void> _getData() async {
+  Future<void> getData() async {
     var rawData = await DBHelper().loadAllHistory();
     for (var element in rawData) {
       dataList.add(_changeRawToBlock(element));
@@ -48,6 +47,19 @@ class DataController extends GetxController {
       deleteData(id);
     }
     sortById();
+  }
+
+  Future<void> insertDataInitial(int id, String content, ByteData data) async {
+    try{
+      final buffer = data.buffer;
+      final id = DateTime.now().millisecondsSinceEpoch;
+      await File(join(imageDir, '$id.jpg')).writeAsBytes(
+        buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+      );
+      await DBHelper().insertHistoryData(HistoryData(id, content));
+    }catch(e){
+     e.printError();
+    }
   }
 
   Future<void> updateData(HistoryBlock original, String content, File? file) async {

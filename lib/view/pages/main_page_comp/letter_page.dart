@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
+import 'package:for_suyeon/utils/util_functions.dart';
 import 'package:for_suyeon/view/components/page_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,12 +25,12 @@ class LetterPage extends StatelessWidget {
             Column(
               children: [
                 const PageTitle(
-                    titleText: "피넛에게", imagePath: "assets/pw/yu.png"),
+                    titleText: "피넛에게", imagePath: "assets/pw/peanut_lying.png"),
                 const SizedBox(
                   height: 32,
                 ),
                 FutureBuilder(
-                  future: _loadLetter('assets/letter/letter.txt'),
+                  future: loadLetter('assets/letter/letter.txt'),
                   builder: (context, snapshot) {
                     if (snapshot.hasData == false) {
                       return Container();
@@ -53,7 +54,7 @@ class LetterPage extends StatelessWidget {
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 InkWell(
-                                  child: Text(
+                                  child: const Text(
                                     "소스링크",
                                     style:
                                     TextStyle(
@@ -80,11 +81,4 @@ class LetterPage extends StatelessWidget {
     );
   }
 
-  Future<String> _loadLetter(String path) async {
-    Future<String> s =
-        Future.delayed(const Duration(milliseconds: 0), () async {
-      return await rootBundle.loadString(path);
-    });
-    return s;
-  }
 }

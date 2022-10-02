@@ -23,9 +23,7 @@ dependencies:
   url_launcher: ^6.1.5
   flutter_launcher_icons: ^0.10.0
   flutter_native_splash: ^2.2.10+1
-  cloud_firestore: ^3.5.0
-  firebase_core: ^1.24.0
-  firebase_auth: ^3.11.0
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -38,10 +36,15 @@ flutter:
   assets:
     - assets/pw/
     - assets/letter/
-    - assets/sample_image/
+    - assets/example/
+
   fonts:
     - family: BinggraeSamanco
       fonts:
         - asset: assets/fonts/BinggraeSamanco-Regular.ttf
         - asset: assets/fonts/BinggraeSamanco-Bold.ttf
+
+    - family: SDSamlip
+      fonts:
+        - asset: assets/fonts/SDSamliphopangcheTTFBasic.ttf
 
