@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:for_suyeon/const.dart';
+import 'package:for_suyeon/db/data_controller.dart';
 import 'package:for_suyeon/view/components/peanut_love_walnut.dart';
 import 'package:for_suyeon/view/pages/main_page.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,8 @@ import 'package:get/get.dart';
 import '../../colors.dart';
 
 class PrevPage extends StatelessWidget {
-  const PrevPage({Key? key}) : super(key: key);
+  final _controller = Get.put(DataController());
+  PrevPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class PrevPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(() => const MainPage());
+                  Get.to(() => MainPage());
                 },
                 child: const Text(
                   "시작하기",

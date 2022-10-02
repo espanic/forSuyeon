@@ -17,14 +17,22 @@ ThemeData mainTheme = ThemeData(
         TextStyle(color: secondary, fontSize: 48, fontWeight: FontWeight.bold),
     headline4: TextStyle(color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
     bodyText1: TextStyle(
-        color: Colors.black, fontSize: 24, fontWeight: FontWeight.w600),
+      fontFamily: "BinggraeSamanco",
+        color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
     bodyText2: TextStyle(
-        color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
+        fontFamily: "BinggraeSamanco",
+        color: Colors.black, fontSize: 24, fontWeight: FontWeight.normal),
+
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      elevation: 10,
       primary: buttonPrimary,
-      minimumSize: const Size(double.infinity, 40),
+      minimumSize: const Size(double.infinity, 60),
+
       textStyle: const TextStyle(
           color: Colors.white,
           fontSize: 32,
@@ -35,5 +43,6 @@ ThemeData mainTheme = ThemeData(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: primary,
+    unselectedItemColor: Colors.grey,
   ),
 );

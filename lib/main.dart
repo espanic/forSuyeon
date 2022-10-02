@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/theme.dart';
 import 'package:for_suyeon/view/pages/prev_page.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
       checkerboardOffscreenLayers: true,
       debugShowCheckedModeBanner: false,
       theme: mainTheme,
-      home: const PrevPage(),
+      home: PrevPage(),
     );
   }
 }

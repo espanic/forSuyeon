@@ -13,10 +13,10 @@ class PeanutLoveWalnut extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "월넛",
+          "호두",
           style: themeData.textTheme.headline1,
         ),
-        Icon(CupertinoIcons.heart, color: themeData.iconTheme.color, size: themeData.iconTheme.size,),
+        Icon(CupertinoIcons.heart, color: themeData.iconTheme.color, size: 80,),
         Text(
           "피넛",
           style: themeData.textTheme.headline1,

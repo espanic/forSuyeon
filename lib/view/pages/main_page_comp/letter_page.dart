@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/view/components/page_title.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LetterPage extends StatelessWidget {
   const LetterPage({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class LetterPage extends StatelessWidget {
             Column(
               children: [
                 const PageTitle(
-                    titleText: "월넛에게", imagePath: "assets/pw/yu.png"),
+                    titleText: "피넛에게", imagePath: "assets/pw/yu.png"),
                 const SizedBox(
                   height: 32,
                 ),
@@ -45,9 +46,25 @@ class LetterPage extends StatelessWidget {
                           width: double.infinity,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
-                            child: Text(
-                              snapshot.data.toString(),
-                              style: Theme.of(context).textTheme.bodyText1,
+                            child: Column(
+                              children: [
+                                Text(
+                                  snapshot.data.toString(),
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                                InkWell(
+                                  child: Text(
+                                    "소스링크",
+                                    style:
+                                    TextStyle(
+                                        fontFamily: "BinggraeSamanco",
+                                        color: Colors.purple, fontSize: 32, fontWeight: FontWeight.normal),
+                                  ),
+                                  onTap: () async {
+                                    await launch('https://github.com/espanic/forSuyeon');
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         ),
@@ -65,7 +82,7 @@ class LetterPage extends StatelessWidget {
 
   Future<String> _loadLetter(String path) async {
     Future<String> s =
-        Future.delayed(const Duration(milliseconds: 50), () async {
+        Future.delayed(const Duration(milliseconds: 0), () async {
       return await rootBundle.loadString(path);
     });
     return s;
