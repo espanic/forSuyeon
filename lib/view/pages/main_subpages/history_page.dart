@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/db/data_controller.dart';
-import 'package:for_suyeon/view/components/CustomDialog.dart';
-import 'package:for_suyeon/view/components/page_title.dart';
+import 'package:for_suyeon/view/components/dialog_components/CustomDialog.dart';
+import 'package:for_suyeon/view/components/common/page_title.dart';
 import 'package:get/get.dart';
 
 class HistoryPage extends StatelessWidget {

@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/db/data_controller.dart';
-import 'package:for_suyeon/view/pages/main_page_comp/call_page.dart';
-import 'package:for_suyeon/view/pages/main_page_comp/chat_page.dart';
-import 'package:for_suyeon/view/pages/main_page_comp/history_page.dart';
-import 'package:for_suyeon/view/pages/main_page_comp/letter_page.dart';
 import 'package:get/get.dart';
+
+import 'main_subpages/call_page.dart';
+import 'main_subpages/chat_page.dart';
+import 'main_subpages/history_page.dart';
+import 'main_subpages/letter_page.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -24,7 +25,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final controller = Get.put(DataController());
-
 
   @override
   Widget build(BuildContext context) {

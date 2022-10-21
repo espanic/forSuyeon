@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/db/data_controller.dart';
-import 'package:for_suyeon/view/components/UpdateDialog.dart';
+import 'package:for_suyeon/view/components/dialog_components/UpdateDialog.dart';
 import 'package:get/get.dart';
-import '../../colors.dart';
-import '../../const.dart';
+import '../../../colors.dart';
+import '../../../const.dart';
 
 class HistoryBlock extends StatefulWidget {
   final int id;

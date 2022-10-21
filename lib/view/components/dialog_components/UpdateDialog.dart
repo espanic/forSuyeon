@@ -2,12 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/db/data_controller.dart';
-import 'package:for_suyeon/view/components/history_block.dart';
-import 'package:for_suyeon/view/components/icon_text_row.dart';
+import 'package:for_suyeon/view/components/dialog_components/BelowButton.dart';
+import 'package:for_suyeon/view/components/history/history_block.dart';
+import 'package:for_suyeon/view/components/dialog_components/icon_text_row.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../const.dart';
+import '../../../const.dart';
 
 class UpdateDialog extends StatefulWidget {
   final HistoryBlock currentBlock;
@@ -47,32 +48,45 @@ class _CustomDialogState extends State<UpdateDialog> {
   }
 
   Widget _belowButtons(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
-          onPressed: () async {
-            await _dataController.updateData(
-                widget.currentBlock, _textController.text, _newImageFile);
-            Navigator.pop(context);
-          },
-          child: Text(
-            "확인",
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            _newImageFile = null;
-            Navigator.pop(context);
-          },
-          child: Text(
-            "취소",
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        )
-      ],
+    return BelowButton(
+      text1: "확인",
+      text2: "취소",
+      onPressed1: () async {
+        await _dataController.updateData(
+            widget.currentBlock, _textController.text, _newImageFile);
+        Navigator.pop(context);
+      },
+      onPressed2:  () {
+        _newImageFile = null;
+        Navigator.pop(context);
+      },
     );
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.end,
+    //   children: [
+    //     TextButton(
+    //       onPressed: () async {
+    //         await _dataController.updateData(
+    //             widget.currentBlock, _textController.text, _newImageFile);
+    //         Navigator.pop(context);
+    //       },
+    //       child: Text(
+    //         "확인",
+    //         style: Theme.of(context).textTheme.bodyText2,
+    //       ),
+    //     ),
+    //     TextButton(
+    //       onPressed: () {
+    //         _newImageFile = null;
+    //         Navigator.pop(context);
+    //       },
+    //       child: Text(
+    //         "취소",
+    //         style: Theme.of(context).textTheme.bodyText2,
+    //       ),
+    //     )
+    //   ],
+    // );
   }
 
   Widget _afterPickImage() {

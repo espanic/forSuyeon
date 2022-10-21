@@ -1,3 +1,7 @@
 flutter_native_splash:
   background_image: "assets/pw/splash.png"
 
+  android_12:
+    image: "assets/pw/splash.png"
+
+

@@ -12,7 +12,7 @@ class IconTextRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(icon, color: buttonLessOpac, size: 32,),
-        SizedBox(width: 8,),
+        const SizedBox(width: 8,),
         Text(text),
       ],
     );

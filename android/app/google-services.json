@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "64017254896-227vpppo9fv494efb4mure9gbpj7bt6s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.for_suyeon",
+            "certificate_hash": "b62c3b9465a06c6364f6c59b74791b288c018cab"
+          }
+        },
+        {
+          "client_id": "64017254896-cuamsflr7rldb80bb34m2ne2i2tvuhrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.for_suyeon",
+            "certificate_hash": "9dbbd37b143348df71af88d0de97c53988f0b7cb"
+          }
+        },
+        {
+          "client_id": "64017254896-g3v7p2672gd76s36dfccsg9asmkcpsjf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.for_suyeon",
+            "certificate_hash": "d784c7b7bf5d8420f0a62ef9eeb023cf6eef2b5c"
+          }
+        },
+        {
+          "client_id": "64017254896-m53137qqpca4foe40fao2agks7a30219.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.for_suyeon",
+            "certificate_hash": "4ad6863668c7b8c21ec4ac082426ace136949bfd"
+          }
+        },
+        {
           "client_id": "64017254896-kt86i4isih2lphbnvmk0d9qgsn00sjp8.apps.googleusercontent.com",
           "client_type": 3
         }

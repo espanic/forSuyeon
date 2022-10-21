@@ -17,7 +17,7 @@ ThemeData mainTheme = ThemeData(
     headline2: TextStyle(
         fontFamily: 'SDSamlip',
         color: secondary,
-        fontSize: 64,
+        fontSize: 54,
         fontWeight: FontWeight.bold),
     headline3:
         TextStyle(color: secondary, fontSize: 48, fontWeight: FontWeight.bold),
@@ -40,7 +40,7 @@ ThemeData mainTheme = ThemeData(
         borderRadius: BorderRadius.circular(10),
       ),
       elevation: 10,
-      primary: buttonPrimary,
+      backgroundColor: buttonPrimary,
       minimumSize: const Size(double.infinity, 60),
       textStyle: const TextStyle(
           color: Colors.white,

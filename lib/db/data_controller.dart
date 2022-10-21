@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 import 'package:for_suyeon/db/db_functions.dart';
 import 'package:for_suyeon/db/history_data.dart';
-import 'package:for_suyeon/view/components/history_block.dart';
+import 'package:for_suyeon/view/components/history/history_block.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/utils/util_functions.dart';
-import 'package:for_suyeon/view/components/page_title.dart';
+import 'package:for_suyeon/view/components/common/page_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LetterPage extends StatelessWidget {

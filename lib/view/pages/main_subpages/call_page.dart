@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:for_suyeon/const.dart';
-import 'package:for_suyeon/view/components/page_title.dart';
+import 'package:for_suyeon/view/components/common/page_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallPage extends StatelessWidget {

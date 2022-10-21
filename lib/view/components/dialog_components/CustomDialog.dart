@@ -2,11 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/db/data_controller.dart';
-import 'package:for_suyeon/view/components/icon_text_row.dart';
+import 'package:for_suyeon/view/components/dialog_components/BelowButton.dart';
+import 'package:for_suyeon/view/components/dialog_components/icon_text_row.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../const.dart';
+import '../../../const.dart';
 
 class CustomDialog extends StatefulWidget {
   const CustomDialog({Key? key}) : super(key: key);
@@ -44,37 +45,53 @@ class _CustomDialogState extends State<CustomDialog> {
   }
 
   Widget _belowButtons(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        _pickedImageFile != null
-            ? TextButton(
-                onPressed: () async {
-                  await _dataController.insertData(
-                    DateTime.now().millisecondsSinceEpoch,
-                    _textController.text,
-                    _pickedImageFile!,
-                  );
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "확인",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-              )
-            : Container(),
-        TextButton(
-          onPressed: () {
-            _pickedImageFile = null;
-            Navigator.pop(context);
-          },
-          child: Text(
-            "닫기",
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        )
-      ],
+    return BelowButton(
+      text1: "확인",
+      text2: "닫기",
+      onPressed1: () async {
+        await _dataController.insertData(
+          DateTime.now().millisecondsSinceEpoch,
+          _textController.text,
+          _pickedImageFile!,
+        );
+        Navigator.pop(context);
+      },
+      onPressed2:  () {
+        _pickedImageFile = null;
+        Navigator.pop(context);
+      },
     );
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.end,
+    //   children: [
+    //     _pickedImageFile != null
+    //         ? TextButton(
+    //             onPressed: () async {
+    //               await _dataController.insertData(
+    //                 DateTime.now().millisecondsSinceEpoch,
+    //                 _textController.text,
+    //                 _pickedImageFile!,
+    //               );
+    //               Navigator.pop(context);
+    //             },
+    //             child: Text(
+    //               "확인",
+    //               style: Theme.of(context).textTheme.bodyText2,
+    //             ),
+    //           )
+    //         : Container(),
+    //     TextButton(
+    //       onPressed: () {
+    //         _pickedImageFile = null;
+    //         Navigator.pop(context);
+    //       },
+    //       child: Text(
+    //         "닫기",
+    //         style: Theme.of(context).textTheme.bodyText2,
+    //       ),
+    //     )
+    //   ],
+    // );
   }
 
   Widget _afterPickImage() {
@@ -119,12 +136,12 @@ class _CustomDialogState extends State<CustomDialog> {
           SimpleDialogOption(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0),
             child: const IconTextRow(text: "앨범에서 선택하기", icon: Icons.image),
-            onPressed: _pickImgFromGallery,
+            onPressed: _pickGallary,
           ),
           SimpleDialogOption(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0),
             child: const IconTextRow(text: "카메라로 촬영하기", icon: Icons.camera_alt),
-            onPressed: _pickImgFromCamera,
+            onPressed: _pickCamera,
           ),
           // Container(
           //   decoration: const BoxDecoration(
@@ -139,7 +156,7 @@ class _CustomDialogState extends State<CustomDialog> {
     );
   }
 
-  void _pickImgFromGallery() async {
+  void _pickGallary() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
@@ -149,7 +166,7 @@ class _CustomDialogState extends State<CustomDialog> {
     }
   }
 
-  void _pickImgFromCamera() async {
+  void _pickCamera() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       setState(() {
