@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:for_suyeon/utils/authorization/GoogleLogin.dart';
-import 'package:for_suyeon/view/pages/prev_page_temp.dart';
+import 'package:for_suyeon/view/pages/prev_page_setting.dart';
 import 'package:get/get.dart';
 
 import '../../../const.dart';
@@ -53,7 +53,7 @@ class LoginedPage extends StatelessWidget {
                   onPressed: () async {
                     bool logoutSuccess = await _logout();
                     if (logoutSuccess) {
-                      Get.offAll(() => const PrevPageTemp());
+                      Get.offAll(() => const PrevPageSetting(alreadySet: true,));
                     }
                   },
                   child: const Text(

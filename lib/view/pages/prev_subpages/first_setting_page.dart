@@ -1,13 +1,16 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/utils/image/image_pick.dart';
+import 'package:for_suyeon/utils/storage/storage_controller.dart';
 import 'package:for_suyeon/utils/validation/validate_functions.dart';
 import 'package:for_suyeon/view/components/common/custom_text_form_field.dart';
-import 'package:for_suyeon/view/pages/prev_page_temp.dart';
+import 'package:for_suyeon/view/pages/prev_page_setting.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,9 +19,9 @@ import '../../components/dialog_components/BelowButton.dart';
 import '../../components/dialog_components/icon_text_row.dart';
 
 class FirstSettingPage extends StatefulWidget {
-  final String id;
-
-  const FirstSettingPage({Key? key, required this.id}) : super(key: key);
+  const FirstSettingPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<FirstSettingPage> createState() => _FirstSettingPageState();
@@ -28,6 +31,9 @@ class _FirstSettingPageState extends State<FirstSettingPage> {
   final prefs = SharedPreferences.getInstance();
   final _imagePick = ImagePick();
   final _formKey = GlobalKey<FormState>();
+  final String defaultImagePath = "assets/example/avatar.png";
+  final user = FirebaseAuth.instance.currentUser;
+  final textController = TextEditingController();
   File? _imageFile;
 
   @override
@@ -51,23 +57,24 @@ class _FirstSettingPageState extends State<FirstSettingPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        const CustomTextFormField(
+                        CustomTextFormField(
+                          controller: textController,
                           label: "닉네임",
                           validator: ValidateFunctions.validateNickname,
                           autoFocus: true,
                         ),
                         CustomTextFormField(
                           label: "ID",
-                          initialValue: widget.id,
+                          initialValue: user == null ? "no user id" : user!.uid,
                           enabled: false,
                         ),
+                        const SizedBox(
+                          height: 60,
+                        ),
+                        _belowButtons(),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  _belowButtons()
                 ],
               ),
             ),
@@ -86,7 +93,24 @@ class _FirstSettingPageState extends State<FirstSettingPage> {
           child: SizedBox(
             height: 60,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final controller = StorageController();
+                final firestore = FirebaseFirestore.instance;
+                if (user != null && _formKey.currentState!.validate()) {
+                  String? downloadUrl;
+                  if (_imageFile != null) {
+                    downloadUrl = await controller.uploadFile(_imageFile!,
+                        "/user_data/${user!.uid}/avatar/image.png");
+                  }
+                  await FirebaseFirestore.instance
+                      .collection('user')
+                      .doc(user!.uid)
+                      .update({
+                    "nickname": textController.text,
+                    "avatarUrl": downloadUrl ?? "-1"
+                  });
+                }
+              },
               child: const Text("설정완료"),
             ),
           ),
@@ -122,7 +146,7 @@ class _FirstSettingPageState extends State<FirstSettingPage> {
     } catch (error) {
       print("fail to log out");
     }
-    Get.offAll(() => const PrevPageTemp());
+    Get.offAll(() => const PrevPageSetting());
   }
 
   Widget _avatar() {
@@ -133,7 +157,7 @@ class _FirstSettingPageState extends State<FirstSettingPage> {
           onTap: _pickImage,
           child: CircleAvatar(
             backgroundColor: grayBackground,
-            backgroundImage: const AssetImage("assets/example/avatar.png"),
+            backgroundImage: AssetImage(defaultImagePath),
             // child: _imageFile != null ? Image.file(_imageFile!) : null,
             foregroundImage: _imageFile != null ? FileImage(_imageFile!) : null,
             radius: 100,

@@ -4,6 +4,10 @@ import 'package:for_suyeon/colors.dart';
 ThemeData mainTheme = ThemeData(
   primaryColor: primary,
   scaffoldBackgroundColor: primary,
+  appBarTheme: const AppBarTheme(
+    color: appbarColor,
+    elevation: 1,
+  ),
   iconTheme: const IconThemeData(
     color: secondary,
     size: 32,

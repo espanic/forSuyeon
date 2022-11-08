@@ -80,7 +80,7 @@ class _SignInPageState extends State<SignInPage> {
       var userCredential = await _socialLogin.login();
       final user = userCredential.user;
       await SignInPage.storage.write(key: "loginMethod", value: 'google');
-      await FirebaseFirestore.instance.collection('user').doc(user!.uid).set({
+      await FirebaseFirestore.instance.collection('user').doc(user!.uid).update({
         'email' : user.email,
       });
     } catch (error) {

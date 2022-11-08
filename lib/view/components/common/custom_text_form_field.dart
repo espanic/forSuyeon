@@ -5,6 +5,7 @@ class CustomTextFormField extends StatelessWidget {
   final onSaved;
   final validator;
   final initialValue;
+  final controller;
   final bool enabled;
   final bool autoFocus;
 
@@ -13,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.label,
     this.enabled = true,
     this.onSaved,
+    this.controller,
     this.validator, this.initialValue,  this.autoFocus = false,
   }) : super(key: key);
 
@@ -32,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           TextFormField(
             initialValue: initialValue,
+            controller: controller,
             onSaved: onSaved,
             validator: validator,
             enabled: enabled,

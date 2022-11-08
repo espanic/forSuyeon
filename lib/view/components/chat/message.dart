@@ -34,9 +34,21 @@ class Messages extends StatelessWidget {
             reverse: true,
             itemCount: chatDocs.length,
             itemBuilder: (context, index) {
-              return ChatBubble(
-                chatDocs[index]['text'],
-                chatDocs[index]['userID'] == user!.uid,
+              bool showAvatar = false;
+              var text = chatDocs[index]['text'];
+              var uid = chatDocs[index]['userID'];
+              if (index == 0 || chatDocs[index - 1]['userID'] != uid) {
+                if (user!.uid != uid) {
+                  showAvatar = true;
+                }
+              }
+              return Row(
+                children: [
+                  ChatBubble(
+                    text,
+                    uid,
+                  ),
+                ],
               );
             },
           );

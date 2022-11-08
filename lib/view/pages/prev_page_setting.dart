@@ -1,13 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/view/pages/prev_subpages/first_setting_page.dart';
 import 'package:for_suyeon/view/pages/prev_subpages/logined_page.dart';
 import 'package:for_suyeon/view/pages/prev_subpages/sign_in_page.dart';
 
-
-class PrevPageTemp extends StatelessWidget {
+class PrevPageSetting extends StatelessWidget {
   final bool? alreadySet;
-  const PrevPageTemp({Key? key, this.alreadySet}) : super(key: key);
+
+  const PrevPageSetting({Key? key, this.alreadySet}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +23,13 @@ class PrevPageTemp extends StatelessWidget {
             print("login error!");
             return const SignInPage();
           }
-          final user = FirebaseAuth.instance.currentUser;
-          if(alreadySet == false || alreadySet == null){
-            return  FirstSettingPage(id: user!.uid,);
+
+          if (alreadySet == null || alreadySet == false) {
+            return const FirstSettingPage();
           }
           return const LoginedPage();
         },
       ),
     );
   }
-
 }

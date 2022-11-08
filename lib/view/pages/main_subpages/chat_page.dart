@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/view/components/chat/message.dart';
@@ -38,6 +39,16 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        title: Text("채팅방"),
+        actions: [
+          PopupMenuButton(itemBuilder: (context) => [
+            const PopupMenuItem(child: Text("채팅방 나가기"),),
+          ],)
+        ],
+      ),
       body: Container(
         padding: const EdgeInsets.only(top: mainPadVal, left: mainPadVal, right: mainPadVal),
         child: Column(

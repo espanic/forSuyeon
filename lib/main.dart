@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: mainTheme,
+      title: "anniversary app for Suyeon",
       home: const SplashScreen(),
     );
   }

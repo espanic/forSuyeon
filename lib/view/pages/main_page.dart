@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/db/data_controller.dart';
+import 'package:for_suyeon/view/pages/main_subpages/MyInfoPage.dart';
+import 'package:for_suyeon/view/pages/main_subpages/chat_page.dart';
 import 'package:get/get.dart';
-
 import 'main_subpages/call_page.dart';
-import 'main_subpages/chat_page.dart';
 import 'main_subpages/history_page.dart';
 import 'main_subpages/letter_page.dart';
 
@@ -16,6 +16,7 @@ class MainPage extends StatefulWidget {
     HistoryPage(),
     const ChatPage(),
     const CallPage(),
+    const MyInfoPage(),
   ];
 
   @override
@@ -31,6 +32,9 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          enableFeedback: false,
+          elevation: 0,
+          showSelectedLabels: false,
           selectedItemColor: buttonPrimary,
           items: const [
             BottomNavigationBarItem(
@@ -49,6 +53,10 @@ class _MainPageState extends State<MainPage> {
               icon: Icon(CupertinoIcons.phone_fill),
               label: '전화',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_rounded),
+              label: '전화',
+            )
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,

@@ -62,12 +62,6 @@ class _HistoryBlockState extends State<HistoryBlock> {
               ),
               Expanded(
                 flex: 1,
-                // child: IconButton(
-                //   onPressed: () async {
-                //     await _dataController.deleteData(id);
-                //   },
-                //   icon: const Icon(Icons.menu),
-                // ),
                 child: PopupMenuButton(
                   itemBuilder: (context) => [
                     PopupMenuItem(
