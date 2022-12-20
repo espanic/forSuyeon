@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:for_suyeon/controller/user_controller.dart';
 import 'package:for_suyeon/view/pages/prev_subpages/first_setting_page.dart';
 import 'package:for_suyeon/view/pages/prev_subpages/logined_page.dart';
+import 'package:for_suyeon/view/pages/prev_subpages/setting_page.dart';
 import 'package:for_suyeon/view/pages/prev_subpages/sign_in_page.dart';
+import 'package:get/get.dart';
 
-class PrevPageSetting extends StatelessWidget {
-  final bool? alreadySet;
+class PrevPageSetting extends GetView<UserController> {
 
-  const PrevPageSetting({Key? key, this.alreadySet}) : super(key: key);
+  const PrevPageSetting({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,8 @@ class PrevPageSetting extends StatelessWidget {
             return const SignInPage();
           }
 
-          if (alreadySet == null || alreadySet == false) {
-            return const FirstSettingPage();
+          if (controller.isProfileAlreadySet.value == false) {
+            return const SettingPage();
           }
           return const LoginedPage();
         },

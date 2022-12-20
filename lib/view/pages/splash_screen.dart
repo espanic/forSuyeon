@@ -4,7 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:for_suyeon/user/user.dart';
+import 'package:for_suyeon/controller/user_controller.dart';
+import 'package:for_suyeon/model/user.dart';
 import 'package:for_suyeon/view/pages/prev_page.dart';
 import 'package:for_suyeon/view/pages/prev_page_setting.dart';
 import 'package:get/get.dart';
@@ -42,34 +43,21 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _initialize() async {
     Stopwatch s = Stopwatch();
     s.start();
-    final controller = Get.put(DataController());
+
     final prefs = await SharedPreferences.getInstance();
     final bool? alreadyInstall = prefs.getBool('alreadyInstall');
-    bool? alreadySet = false;
     if (alreadyInstall != true) {
-      final content = await loadLetter('assets/example/example.txt');
-      var bytes = await rootBundle.load('assets/example/example.jpg');
-      final id = DateTime.now().millisecondsSinceEpoch;
-      await controller.insertDataInitial(id, content, bytes);
       prefs.setBool('alreadyInstall', true);
     }
-    await controller.getData();
 
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final userInfoDoc = await FirebaseFirestore.instance
-          .collection('user')
-          .doc(user.uid).get();
-      final userInfo = userInfoDoc.data();
-      // single tone
-      if (userInfo == null || userInfo['avatarUrl'] == null || userInfo['nickname'] == null) {
-        alreadySet = false;
-      } else {
-        MyUser().saveImage(userInfo['avatarUrl']);
-        alreadySet = true;
+    var userController = Get.put(UserController());
+
+    var currentUser = FirebaseAuth.instance.currentUser;
+    if(currentUser!= null){
+      await userController.getData(currentUser.uid);
+      if(userController.user!.nickName != null && userController.user!.profileImage != null){
+        userController.isProfileAlreadySet.value=true;
       }
-      print("already set : $alreadySet");
-
     }
 
     s.stop();
@@ -79,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
     Get.offAll(
-      () => PrevPageSetting(alreadySet: alreadySet),
+      () => const PrevPageSetting(),
     );
   }
 }

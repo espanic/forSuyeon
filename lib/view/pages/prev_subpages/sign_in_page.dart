@@ -1,13 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:for_suyeon/colors.dart';
-import 'package:get/get.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:for_suyeon/view/components/login/login_box.dart';
 import '../../../const.dart';
-import '../../../utils/authorization/GoogleLogin.dart';
 import '../../components/dialog_components/BelowButton.dart';
-import '../../components/login_buttons/Kakao_button.dart';
 import '../../components/common/peanut_love_walnut.dart';
 
 class SignInPage extends StatefulWidget {
@@ -20,76 +15,68 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  bool showSpinner = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ModalProgressHUD(
-        progressIndicator: const CircularProgressIndicator(
-          color: buttonPrimary,
-        ),
-        inAsyncCall: showSpinner,
-        child: Container(
-          padding: const EdgeInsets.all(mainPadVal),
-          child: Column(
-            children: [
-              PeanutLoveWalnut(
-                themeData: Theme.of(context),
-              ),
-              const Spacer(
-                flex: 1,
-              ),
-              Image.asset(
-                "assets/pw/kisses.png",
-                fit: BoxFit.cover,
-              ),
-              const Spacer(
-                flex: 1,
-              ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: LoginButton(
-                        image: Image.asset(
-                            'assets/app_icons/btn_google_signin_light_focus_web.png',
-                            fit: BoxFit.contain),
-                        onTap: () async {
-                          setState(() {
-                            showSpinner = true;
-                          });
-                          await _googleLogin(context);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+      body: Container(
+        padding: const EdgeInsets.all(mainPadVal),
+        child: ListView(
+          children: [
+            PeanutLoveWalnut(
+              themeData: Theme.of(context),
+            ),
+            const SizedBox(height: 8),
+            Image.asset(
+              "assets/pw/kisses.png",
+              fit: BoxFit.cover,
+            ),
+            const LoginBox(),
+          ],
         ),
       ),
     );
   }
 
-  Future<void> _googleLogin(BuildContext context) async {
-    var _socialLogin = GoogleLogin();
-    try {
-      var userCredential = await _socialLogin.login();
-      final user = userCredential.user;
-      await SignInPage.storage.write(key: "loginMethod", value: 'google');
-      await FirebaseFirestore.instance.collection('user').doc(user!.uid).update({
-        'email' : user.email,
-      });
-    } catch (error) {
-      print("google login error");
-      error.printError();
-      _showLoginFailDialog(context);
-    }
-    showSpinner = false;
-  }
+  // Future<Expanded> _googleLoginButton(BuildContext context) async {
+  //   return Expanded(
+  //             flex: 2,
+  //             child: Column(
+  //               children: [
+  //                 Expanded(
+  //                   flex: 1,
+  //                   child: LoginButton(
+  //                     image: Image.asset(
+  //                         'assets/app_icons/btn_google_signin_light_focus_web.png',
+  //                         fit: BoxFit.contain),
+  //                     onTap: () async {
+  //                       setState(() {
+  //                         showSpinner = true;
+  //                       });
+  //                       await _googleLogin(context);
+  //                     },
+  //                   ),
+  //                 )
+  //               ],
+  //             ),
+  //           );
+  // }
+  //
+  // Future<void> _googleLogin(BuildContext context) async {
+  //   var _socialLogin = GoogleLogin();
+  //   try {
+  //     var userCredential = await _socialLogin.login();
+  //     final user = userCredential.user;
+  //     await SignInPage.storage.write(key: "loginMethod", value: 'google');
+  //     await FirebaseFirestore.instance.collection('user').doc(user!.uid).update({
+  //       'email' : user.email,
+  //     });
+  //   } catch (error) {
+  //     print("google login error");
+  //     error.printError();
+  //     _showLoginFailDialog(context);
+  //   }
+  //   showSpinner = false;
+  // }
 
   void _showLoginFailDialog(BuildContext context) {
     showDialog(

@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
-import 'package:for_suyeon/db/data_controller.dart';
 import 'package:for_suyeon/view/components/dialog_components/BelowButton.dart';
 import 'package:for_suyeon/view/components/dialog_components/icon_text_row.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../const.dart';
@@ -19,7 +17,7 @@ class CustomDialog extends StatefulWidget {
 class _CustomDialogState extends State<CustomDialog> {
   final ImagePicker _picker = ImagePicker();
   final _textController = TextEditingController();
-  final _dataController = Get.put(DataController());
+  // final _dataController = Get.put(DataController());
   File? _pickedImageFile;
 
   @override
@@ -49,11 +47,11 @@ class _CustomDialogState extends State<CustomDialog> {
       text1: "확인",
       text2: "닫기",
       onPressed1: () async {
-        await _dataController.insertData(
-          DateTime.now().millisecondsSinceEpoch,
-          _textController.text,
-          _pickedImageFile!,
-        );
+        // await _dataController.insertData(
+        //   DateTime.now().millisecondsSinceEpoch,
+        //   _textController.text,
+        //   _pickedImageFile!,
+        // );
         Navigator.pop(context);
       },
       onPressed2:  () {
@@ -61,37 +59,6 @@ class _CustomDialogState extends State<CustomDialog> {
         Navigator.pop(context);
       },
     );
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.end,
-    //   children: [
-    //     _pickedImageFile != null
-    //         ? TextButton(
-    //             onPressed: () async {
-    //               await _dataController.insertData(
-    //                 DateTime.now().millisecondsSinceEpoch,
-    //                 _textController.text,
-    //                 _pickedImageFile!,
-    //               );
-    //               Navigator.pop(context);
-    //             },
-    //             child: Text(
-    //               "확인",
-    //               style: Theme.of(context).textTheme.bodyText2,
-    //             ),
-    //           )
-    //         : Container(),
-    //     TextButton(
-    //       onPressed: () {
-    //         _pickedImageFile = null;
-    //         Navigator.pop(context);
-    //       },
-    //       child: Text(
-    //         "닫기",
-    //         style: Theme.of(context).textTheme.bodyText2,
-    //       ),
-    //     )
-    //   ],
-    // );
   }
 
   Widget _afterPickImage() {

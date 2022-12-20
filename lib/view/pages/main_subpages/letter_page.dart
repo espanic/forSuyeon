@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
+import 'package:for_suyeon/controller/letter_page_controller.dart';
 import 'package:for_suyeon/utils/util_functions.dart';
 import 'package:for_suyeon/view/components/common/page_title.dart';
+import 'package:for_suyeon/view/components/letter/letterThumbNail.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LetterPage extends StatelessWidget {
+class LetterPage extends GetView<LetterPageController> {
   const LetterPage({Key? key}) : super(key: key);
 
   @override
@@ -29,50 +32,25 @@ class LetterPage extends StatelessWidget {
                 const SizedBox(
                   height: 32,
                 ),
-                FutureBuilder(
-                  future: loadLetter('assets/letter/letter.txt'),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData == false) {
-                      return Container();
-                    } else if (snapshot.hasError) {
-                      return Container();
-                    } else {
-                      return Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: whiteHalf,
-                            borderRadius: BorderRadius.circular(circularRadius),
-                          ),
-                          padding: const EdgeInsets.all(letterPadVal),
-                          width: double.infinity,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Column(
-                              children: [
-                                Text(
-                                  snapshot.data.toString(),
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                                InkWell(
-                                  child: const Text(
-                                    "소스링크",
-                                    style:
-                                    TextStyle(
-                                        fontFamily: "BinggraeSamanco",
-                                        color: Colors.purple, fontSize: 32, fontWeight: FontWeight.normal),
-                                  ),
-                                  onTap: () async {
-                                    await launch('https://github.com/espanic/forSuyeon');
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                )
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: whiteHalf,
+                      borderRadius: BorderRadius.circular(circularRadius),
+                    ),
+                    padding: const EdgeInsets.all(letterPadVal),
+                    width: double.infinity,
+                    child: GetX<LetterPageController>(
+                      init: controller,
+                      builder: (controller) {
+                        if (controller.letter.isEmpty) {
+                          return _showLetterList();
+                        }
+                        return _showLetter(context);
+                      },
+                    ),
+                  ),
+                ),
               ],
             )
           ],
@@ -81,4 +59,60 @@ class LetterPage extends StatelessWidget {
     );
   }
 
+  Widget _showLetterList() {
+    return ListView(
+      children: [
+        LetterThumbNail(
+          title: "첫 편지!",
+          subTitle: "수연이 생일축하행~!",
+          assetName: "assets/letter/walnut1.jpg",
+          onTap: () async {
+            await controller.loadLetter('assets/letter/letter.txt');
+          },
+        ),
+        LetterThumbNail(
+          title: "두번째 편지!",
+          subTitle: "메리크리스마스!!",
+          assetName: "assets/letter/walnut2.jpg",
+          onTap: () async {
+            await controller.loadLetter('assets/letter/letter2.txt');
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _showLetter(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextButton(
+            onPressed: () {
+              controller.clearLetter();
+            },
+            child: const Text("목록으로 돌아가기", style: TextStyle(color: secondary),),
+          ),
+          Text(
+            controller.letter,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          InkWell(
+            child: const Text(
+              "소스링크",
+              style: TextStyle(
+                  fontFamily: "BinggraeSamanco",
+                  color: Colors.purple,
+                  fontSize: 32,
+                  fontWeight: FontWeight.normal),
+            ),
+            onTap: () async {
+              await launch('https://github.com/espanic/forSuyeon');
+            },
+          )
+        ],
+      ),
+    );
+  }
 }

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/const.dart';
+import 'package:for_suyeon/controller/binding/main_page_binding.dart';
 import 'package:for_suyeon/utils/authorization/GoogleLogin.dart';
 import 'package:for_suyeon/utils/authorization/KakaoLogin.dart';
 import 'package:for_suyeon/utils/authorization/social_login.dart';
 import 'package:for_suyeon/view/components/dialog_components/BelowButton.dart';
-import 'package:for_suyeon/view/components/login_buttons/Kakao_button.dart';
 import 'package:for_suyeon/view/components/common/peanut_love_walnut.dart';
 import 'package:for_suyeon/view/pages/main_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+
+import '../components/login/Kakao_button.dart';
 
 class PrevPage extends StatefulWidget {
   const PrevPage({Key? key}) : super(key: key);
@@ -94,7 +96,7 @@ class _PrevPageState extends State<PrevPage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(() => MainPage());
+                            Get.to(() => MainPage(), binding: MainPageBinding());
                           },
                           child: const Text(
                             "시작하기",

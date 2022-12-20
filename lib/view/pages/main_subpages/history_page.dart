@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
-import 'package:for_suyeon/db/data_controller.dart';
-import 'package:for_suyeon/view/components/dialog_components/CustomDialog.dart';
+import 'package:for_suyeon/controller/history_data_controller.dart';
 import 'package:for_suyeon/view/components/common/page_title.dart';
+import 'package:for_suyeon/view/components/dialog_components/update_dialog_temp.dart';
+import 'package:for_suyeon/view/components/history/history_block_temp.dart';
 import 'package:get/get.dart';
 
-class HistoryPage extends StatelessWidget {
-  HistoryPage({Key? key}) : super(key: key);
-  final _dataController = Get.put(DataController());
+class HistoryPage extends GetView<HistoryDataController> {
+  const HistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print("history page build");
     return Scaffold(
       floatingActionButton: SizedBox(
         height: 70,
@@ -23,8 +22,7 @@ class HistoryPage extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (context) {
-                  // _pickedImage = null;
-                  return const CustomDialog();
+                  return const UpdateDialogTemp(DialogType.create);
                 },
               );
             },
@@ -50,13 +48,21 @@ class HistoryPage extends StatelessWidget {
             ),
             Obx(
               () => Expanded(
-                child: ListView(
-                  children: [
-                    ..._dataController.dataList,
-                    const SizedBox(
-                      height: 70,
-                    ),
-                  ],
+                child: ListView.builder(
+                  itemCount: controller.dataList.length +1 ,
+                  itemBuilder: (context, index) {
+                    // bottom margin
+                    if(index == controller.dataList.length){
+                      return const SizedBox(height: 70);
+                    }
+                    var data = controller.dataList[index];
+                    return HistoryBlockTemp(
+                        content: data.content,
+                        imageUrl: data.imageUrl,
+                        date: data.date,
+                      id: data.id,
+                    );
+                  },
                 ),
               ),
             ),

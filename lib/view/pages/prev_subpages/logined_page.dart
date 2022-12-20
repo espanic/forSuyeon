@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:for_suyeon/controller/binding/main_page_binding.dart';
 import 'package:for_suyeon/utils/authorization/GoogleLogin.dart';
 import 'package:for_suyeon/view/pages/prev_page_setting.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class LoginedPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(() => MainPage());
+                    Get.to(() => MainPage(), binding: MainPageBinding());
                   },
                   child: const Text(
                     "시작하기",
@@ -53,7 +54,7 @@ class LoginedPage extends StatelessWidget {
                   onPressed: () async {
                     bool logoutSuccess = await _logout();
                     if (logoutSuccess) {
-                      Get.offAll(() => const PrevPageSetting(alreadySet: true,));
+                      Get.offAll(() => const PrevPageSetting());
                     }
                   },
                   child: const Text(
