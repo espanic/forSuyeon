@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:for_suyeon/controller/history_data_controller.dart';
 import 'package:for_suyeon/controller/image_pick_controller.dart';
+import 'package:for_suyeon/controller/user_controller.dart';
 import 'package:get/get.dart';
 import '../../../colors.dart';
 import '../../../const.dart';
@@ -9,13 +10,13 @@ import 'icon_text_row.dart';
 
 enum DialogType { create, update }
 
-class UpdateDialogTemp extends GetView<ImagePickController> {
+class ImageUploadDialog extends GetView<ImagePickController> {
   final String? content;
   final String? id;
   final String? imageUrl;
   final DialogType type;
 
-  const UpdateDialogTemp(this.type,
+  const ImageUploadDialog(this.type,
       {Key? key, this.content, this.id, this.imageUrl})
       : super(key: key);
 
@@ -139,13 +140,14 @@ class UpdateDialogTemp extends GetView<ImagePickController> {
       onPressed1: () async {
         var historyDataController = Get.find<HistoryDataController>();
         if (type == DialogType.update) {
-          await historyDataController.updateData(
+          historyDataController.updateData(
               textController.text, id!, imageUrl!, controller.imageFile);
           controller.clearImageFile();
         } else {
           if (controller.imageFile != null) {
+            var userController = Get.find<UserController>();
             historyDataController.createData(
-                textController.text, DateTime.now(), controller.imageFile!);
+                textController.text, DateTime.now(), userController.user!.id, controller.imageFile!);
           }else{
             Get.snackbar("오류", "이미지를 선태하세요!");
           }

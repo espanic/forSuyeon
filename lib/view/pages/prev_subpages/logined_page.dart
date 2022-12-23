@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:for_suyeon/controller/binding/main_page_binding.dart';
-import 'package:for_suyeon/utils/authorization/GoogleLogin.dart';
-import 'package:for_suyeon/view/pages/prev_page_setting.dart';
+import 'package:for_suyeon/controller/user_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../const.dart';
 import '../../components/common/peanut_love_walnut.dart';
 import '../main_page.dart';
 
-class LoginedPage extends StatelessWidget {
+class LoginedPage extends GetView<UserController> {
   static const storage = FlutterSecureStorage();
 
   const LoginedPage({Key? key}) : super(key: key);
@@ -52,10 +51,7 @@ class LoginedPage extends StatelessWidget {
                     backgroundColor: Colors.grey,
                   ),
                   onPressed: () async {
-                    bool logoutSuccess = await _logout();
-                    if (logoutSuccess) {
-                      Get.offAll(() => const PrevPageSetting());
-                    }
+                    await controller.logout();
                   },
                   child: const Text(
                     "로그아웃",
@@ -69,19 +65,4 @@ class LoginedPage extends StatelessWidget {
     );
   }
 
-  Future<bool> _logout() async {
-    String? loginMethod = await storage.read(key: "loginMethod");
-    try {
-      if (loginMethod == 'google') {
-        GoogleLogin socialLogin = GoogleLogin();
-        await socialLogin.logout();
-        await storage.delete(key: "loginMethod");
-        return true;
-      }
-      return false;
-    } catch (error) {
-      print("fail to log out");
-      return false;
-    }
-  }
 }

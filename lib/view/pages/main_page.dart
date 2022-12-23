@@ -12,7 +12,7 @@ class MainPage extends StatefulWidget {
   final List<Widget> _indexItems = [
     const LetterPage(),
     const HistoryPage(),
-    const ChatPage(),
+    // const ChatPage(),
     const CallPage(),
     const MyInfoPage(),
   ];
@@ -42,10 +42,10 @@ class _MainPageState extends State<MainPage> {
               icon: Icon(CupertinoIcons.heart_fill),
               label: '앨범',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.chat_bubble_fill),
-              label: '채팅',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(CupertinoIcons.chat_bubble_fill),
+            //   label: '채팅',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.phone_fill),
               label: '전화',

@@ -1,18 +1,10 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:for_suyeon/controller/user_controller.dart';
-import 'package:for_suyeon/model/user.dart';
-import 'package:for_suyeon/view/pages/prev_page.dart';
 import 'package:for_suyeon/view/pages/prev_page_setting.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../db/data_controller.dart';
-import '../../utils/util_functions.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -53,10 +45,11 @@ class _SplashScreenState extends State<SplashScreen> {
     var userController = Get.put(UserController());
 
     var currentUser = FirebaseAuth.instance.currentUser;
-    if(currentUser!= null){
+    if (currentUser != null) {
       await userController.getData(currentUser.uid);
-      if(userController.user!.nickName != null && userController.user!.profileImage != null){
-        userController.isProfileAlreadySet.value=true;
+      if (userController.user!.nickName != null &&
+          userController.user!.profileImage != null) {
+        userController.isProfileAlreadySet.value = true;
       }
     }
 

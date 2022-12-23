@@ -23,10 +23,11 @@ class HistoryDataRepository {
   }
 
   Future<void> createData(
-      String content, DateTime dateTime, File imageFile) async {
+      String content, DateTime dateTime, String uid, File imageFile) async {
     Map<String, dynamic> data = {
       "content": content,
       "date": Timestamp.fromDate(dateTime),
+      "userID" : uid,
     };
     await _provider.createData(data, imageFile);
   }

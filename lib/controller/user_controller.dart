@@ -9,26 +9,27 @@ class UserController extends GetxController {
   final _repository = UserRepository();
   final Rxn<MyUser> _user = Rxn<MyUser>();
   final RxBool isProfileAlreadySet = false.obs;
+  final Rxn<User> _firebaseUser = Rxn<User>();
+
+
 
   MyUser? get user => _user.value;
+  User? get firebaseUser => _firebaseUser.value;
 
 
 
   @override
   Future<void> onInit() async {
-    var currentUser = FirebaseAuth.instance.currentUser;
-    // if(currentUser!= null){
-    //   await getData(currentUser.uid);
-    //   if(user!.nickName != null && user!.profileImage != null){
-    //     _isProfileAlreadySet.value = true;
-    //   }
-    // }
     super.onInit();
+    _firebaseUser.bindStream(FirebaseAuth.instance.authStateChanges());
   }
 
   Future<bool> login(String email, String password) async {
     try {
       _user.value = await _repository.login(email, password);
+      if(_user.value!.nickName != null && _user.value!.avatarUrl != null){
+        isProfileAlreadySet.value = true;
+      }
       return true;
     } catch (e) {
       e.printError();
@@ -39,6 +40,7 @@ class UserController extends GetxController {
   Future<bool> logout() async {
     try {
       await _repository.logout();
+      _user.value = null;
       return true;
     } catch (e) {
       e.printError();

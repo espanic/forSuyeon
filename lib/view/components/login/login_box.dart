@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/utils/validation/validate_functions.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,7 @@ class LoginBox extends GetView<UserController> {
       child: Column(
         children: [
           LoginInputWidget(
-            prefixIcon: const Icon(Icons.key),
+            prefixIcon: const Icon(Icons.key, color: buttonPrimary,),
             topLabel: "이메일",
             hintText: "이메일을 입력하세요.",
             onSaved: (newValue) {},
@@ -30,7 +31,7 @@ class LoginBox extends GetView<UserController> {
             height: 8,
           ),
           LoginInputWidget(
-            prefixIcon: const Icon(Icons.password),
+            prefixIcon: const Icon(Icons.password, color: buttonPrimary),
             topLabel: "비밀번호",
             hintText: "비밀번호를 입력하세요.",
             obscureText: true,

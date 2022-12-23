@@ -10,7 +10,11 @@ import '../../components/dialog_components/BelowButton.dart';
 import '../../components/dialog_components/icon_text_row.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({Key? key}) : super(key: key);
+  final String? nickname;
+  final String? avatarUrl;
+
+  const SettingPage({Key? key, this.nickname, this.avatarUrl})
+      : super(key: key);
 
   ImagePickController get imagePickController => Get.put(ImagePickController());
 
@@ -20,6 +24,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     final textController = TextEditingController();
+    textController.text = nickname ?? "";
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(mainPadVal),
@@ -34,7 +39,7 @@ class SettingPage extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  Obx(() => _avatar(context)),
+                  _avatar(context),
                   _formFields(_formKey, textController),
                   _belowButtons(_formKey, textController),
                 ],
@@ -58,10 +63,13 @@ class SettingPage extends StatelessWidget {
             validator: ValidateFunctions.validateNickname,
             autoFocus: true,
           ),
-          CustomTextFormField(
-            label: "ID",
-            initialValue: userController.user!.id,
-            enabled: false,
+          Obx(
+            () => CustomTextFormField(
+              label: "ID",
+              initialValue:
+                  userController.user != null ? userController.user!.id : "",
+              enabled: false,
+            ),
           ),
           const SizedBox(
             height: 60,
@@ -73,7 +81,6 @@ class SettingPage extends StatelessWidget {
 
   Widget _avatar(BuildContext context) {
     const String defaultImagePath = "assets/example/avatar.png";
-    var imageFile = imagePickController.imageFile;
     return Padding(
       padding: const EdgeInsets.only(top: 16, bottom: 16),
       child: Center(
@@ -81,11 +88,18 @@ class SettingPage extends StatelessWidget {
           onTap: () {
             _pickImage(context);
           },
-          child: CircleAvatar(
-            backgroundColor: grayBackground,
-            backgroundImage: const AssetImage(defaultImagePath),
-            foregroundImage: imageFile != null ? FileImage(imageFile) : null,
-            radius: 100,
+          child: GetBuilder<ImagePickController>(
+            init: imagePickController,
+            builder: (controller) {
+              return CircleAvatar(
+                backgroundColor: grayBackground,
+                backgroundImage: const AssetImage(defaultImagePath),
+                foregroundImage: controller.imageFile != null
+                    ? FileImage(controller.imageFile!)
+                    : null,
+                radius: 100,
+              );
+            },
           ),
         ),
       ),
@@ -104,6 +118,7 @@ class SettingPage extends StatelessWidget {
               child: const IconTextRow(text: "앨범에서 선택하기", icon: Icons.image),
               onPressed: () async {
                 await imagePickController.pickImgFromGallery();
+                Navigator.pop(context);
               },
             ),
             SimpleDialogOption(
@@ -113,6 +128,7 @@ class SettingPage extends StatelessWidget {
                     text: "카메라로 촬영하기", icon: Icons.camera_alt),
                 onPressed: () async {
                   await imagePickController.pickImgFromCamera();
+                  Navigator.pop(context);
                 }),
           ],
         ),
@@ -141,8 +157,9 @@ class SettingPage extends StatelessWidget {
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   if (imagePickController.imageFile != null) {
-                    userController.saveProfile(
+                    await userController.saveProfile(
                         textController.text, imagePickController.imageFile!);
+                    userController.isProfileAlreadySet.value = true;
                   } else {
                     Get.snackbar("이미지 선택안함.", "이미지를 선택하세요.");
                   }

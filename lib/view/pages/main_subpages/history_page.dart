@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:for_suyeon/colors.dart';
 import 'package:for_suyeon/const.dart';
 import 'package:for_suyeon/controller/history_data_controller.dart';
+import 'package:for_suyeon/controller/image_pick_controller.dart';
 import 'package:for_suyeon/view/components/common/page_title.dart';
-import 'package:for_suyeon/view/components/dialog_components/update_dialog_temp.dart';
-import 'package:for_suyeon/view/components/history/history_block_temp.dart';
+import 'package:for_suyeon/view/components/dialog_components/image_upload_dialog.dart';
+import 'package:for_suyeon/view/components/history/history_block.dart';
 import 'package:get/get.dart';
 
 class HistoryPage extends GetView<HistoryDataController> {
@@ -22,7 +23,8 @@ class HistoryPage extends GetView<HistoryDataController> {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return const UpdateDialogTemp(DialogType.create);
+                  Get.find<ImagePickController>().clearImageFile();
+                  return const ImageUploadDialog(DialogType.create);
                 },
               );
             },
@@ -56,7 +58,7 @@ class HistoryPage extends GetView<HistoryDataController> {
                       return const SizedBox(height: 70);
                     }
                     var data = controller.dataList[index];
-                    return HistoryBlockTemp(
+                    return HistoryBlock(
                         content: data.content,
                         imageUrl: data.imageUrl,
                         date: data.date,

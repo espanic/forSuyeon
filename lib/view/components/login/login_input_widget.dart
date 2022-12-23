@@ -60,6 +60,7 @@ class LoginInputWidget extends StatelessWidget {
               //     color: Color.fromRGBO(74, 77, 84, 0.2),
               //   ),
               // ),
+              focusColor: buttonPrimary,
               focusedBorder: const OutlineInputBorder(
                 //gapPadding: 16,
                 borderSide: BorderSide(
@@ -71,7 +72,7 @@ class LoginInputWidget extends StatelessWidget {
               hintStyle: Theme.of(context)
                   .textTheme
                   .bodyLarge!
-                  .copyWith(color: Colors.white54),
+                  .copyWith(color: Colors.grey),
               errorText: errorText,
             ),
           ),

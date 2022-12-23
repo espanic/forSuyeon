@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:for_suyeon/domain/repository/history_data_repository.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 
 import '../model/history_data.dart';
@@ -17,9 +18,9 @@ class HistoryDataController extends GetxController {
     _dataList.bindStream(_repository.streamData());
   }
 
-  Future<bool> createData(String content, DateTime dateTime, File imageFile)async {
+  Future<bool> createData(String content, DateTime dateTime, String uid,  File imageFile)async {
     try{
-      await _repository.createData(content, dateTime, imageFile);
+      await _repository.createData(content, dateTime,uid,  imageFile);
       return true;
     }catch(e){
       return false;
@@ -43,4 +44,18 @@ class HistoryDataController extends GetxController {
       return false;
     }
   }
+
+  Future<void> saveImage(String imageUrl) async {
+    try{
+      await GallerySaver.saveImage(imageUrl);
+      Get.snackbar("이미지 저장", "성공했습니다.");
+    }catch(e){
+      Get.snackbar("이미지 저장 오류", "실패했습니다.");
+    }
+
+
+
+
+  }
+
 }
